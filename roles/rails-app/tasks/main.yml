@@ -1,0 +1,33 @@
+---
+- name: Require app name
+  assert:
+    that:
+      - rails_app_name is defined
+      - rails_app_name != ""
+    msg: rails_app_name is required
+
+- name: App user
+  user:
+    name: "{{ rails_app_name }}"
+    state: present
+    system: yes
+
+- name: Deploy group
+  group:
+    name: deploy
+    state: present
+
+- name: Vagrant user in deploy group
+  user:
+    name: vagrant
+    groups: deploy
+    append: yes
+  when: running_in_vagrant == true
+
+- name: Deployment directory
+  file:
+    path: /srv/{{ rails_app_name }}
+    state: directory
+    owner: "{{ rails_app_name }}"
+    group: deploy
+    mode: 0o6775

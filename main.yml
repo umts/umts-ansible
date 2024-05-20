@@ -3,3 +3,6 @@
   become: yes
   roles:
   - base
+  - role: rails-app
+    vars:
+      rails_app_name: umaps-rails
