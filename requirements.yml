@@ -1,0 +1,4 @@
+collections:
+  - name: umass_it.common
+    type: git
+    source: 'git@bitbucket.org:umass-amherst/it-common-ansible-collection.git'
