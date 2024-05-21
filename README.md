@@ -12,7 +12,7 @@ Setup
 2. Install the required Python packages
     ```bash
     source .envrc # done automatically if you have direnv
-    pipenv install
+    pipenv install --dev
     ```
 3. Install the required Ansible roles and collections
     ```bash

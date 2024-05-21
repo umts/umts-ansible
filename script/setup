@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+if [ ! command -v direnv >/dev/null 2>&1 ]; then
+  echo "No direnv found. Installing..."
+else
+  echo "Direnv found. Updating..."
+fi
