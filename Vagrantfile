@@ -3,7 +3,6 @@
 
 Vagrant.configure('2') do |config|
   config.vm.box = 'generic/rhel9'
-  config.vm.provider 'libvirt'
 
   config.trigger.after :up do |trigger|
     trigger.name = 'write_ssh_config'
@@ -24,7 +23,8 @@ Vagrant.configure('2') do |config|
     trigger.info = 'Removing SSH configuration from local data path'
 
     trigger.ruby do |env, _machine|
-      File.delete(File.join(env.local_data_path, 'ssh_config'))
+      ssh_config_file = File.join(env.local_data_path, 'ssh_config')
+      File.delete(ssh_config_file) if File.exist?(ssh_config_file)
     end
   end
 

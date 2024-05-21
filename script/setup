@@ -4,15 +4,15 @@ set -e
 
 cd "$(dirname "$0")/.."
 
-if [ ! command -v direnv >/dev/null 2>&1 ]; then
+if ! command -v direnv &>/dev/null; then
   export PIPENV_VENV_IN_PROJECT=1
   if [ -f .venv/bin/activate ]; then
-    source .venv/bin/activate
+    echo "Run 'source .venv/bin/activate' to activate the virtualenv"
   else
     pipenv install --dev
   fi
 fi
 
-cp -n .envrc.example .envrc
+cp -n .envrc.example .envrc || true
 
 .venv/bin/ansible-galaxy install -r requirements.yml
