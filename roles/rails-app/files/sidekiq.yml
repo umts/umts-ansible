@@ -1,0 +1,6 @@
+---
+:concurrency: 1
+:environment: production
+:queues:
+  - default
+  - mailers

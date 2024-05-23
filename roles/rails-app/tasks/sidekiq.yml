@@ -1,0 +1,18 @@
+---
+- name: Install redis
+  yum:
+    name: redis
+    state: present
+- name: Redis service
+  systemd:
+    name: redis.service
+    enabled: yes
+    state: started
+
+- name: Sidekiq config
+  copy:
+    dest: /srv/{{ rails_app_name }}/shared/config/sidekiq.yml
+    src: sidekiq.yml
+    owner: "{{ rails_app_name }}"
+    group: deploy
+    mode: 0o664

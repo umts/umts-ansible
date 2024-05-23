@@ -13,3 +13,4 @@
         port: 3308
         username: umaps-rail-production
         password_kp_path: databases/umaps-rails
+      rails_needs_sidekiq: true
