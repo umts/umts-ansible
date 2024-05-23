@@ -32,6 +32,7 @@ Vagrant.configure('2') do |config|
     trigger.name = 'unregister_rhsm'
     trigger.info = 'Unregistering the system from Red Hat Subscription Manager'
 
+    trigger.on_error = :continue
     trigger.run_remote = { inline: <<~SHELL }
       sudo subscription-manager unregister
     SHELL
