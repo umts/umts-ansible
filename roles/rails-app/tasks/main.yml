@@ -1,10 +1,13 @@
 ---
-- name: Require app name
+- name: Require variables
   assert:
     that:
-      - rails_app_name is defined
-      - rails_app_name != ""
-    msg: rails_app_name is required
+      - "item is defined"
+      - "item != ''"
+    msg: "{{ item }} is required"
+  with_items:
+    - rails_app_name
+    - rails_production_key_kp_path
 
 - name: App user
   user:
@@ -31,3 +34,27 @@
     owner: "{{ rails_app_name }}"
     group: deploy
     mode: 0o6775
+- name: Config directory
+  file:
+    path: /srv/{{ rails_app_name }}/shared/config/credentials
+    state: directory
+    owner: "{{ rails_app_name }}"
+    group: deploy
+    mode: 0o6775
+
+- name: Read production key
+  become: false
+  local_action:
+    module: hasnimehdi91.keepass.secret_reader
+    db_path: "{{ password_database_file }}"
+    db_password: "{{ password_database_password }}"
+    secret_path: "{{ rails_production_key_kp_path }}"
+  register: production_key_secret
+
+- name: Production key
+  copy:
+    dest: /srv/{{ rails_app_name }}/shared/config/credentials/production.key
+    content: "{{ production_key_secret.secret['production.key'].password }}"
+    owner: "{{ rails_app_name }}"
+    group: deploy
+    mode: 0o660
