@@ -1,0 +1,9 @@
+production:
+  adapter: mysql2
+  database: {{ rails_database.database }}
+  host: {{ rails_database.host }}
+  port: {{ rails_database.port }}
+  username: {{ rails_database.username }}
+  password: {{ database_password_secret.secret[kp_key_name].password }}
+  pool: 20
+  reconnect: true

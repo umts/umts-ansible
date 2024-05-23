@@ -8,6 +8,7 @@
   with_items:
     - rails_app_name
     - rails_production_key_kp_path
+    - rails_database
 
 - name: App user
   user:
@@ -58,3 +59,22 @@
     owner: "{{ rails_app_name }}"
     group: deploy
     mode: 0o660
+
+- name: Read database password
+  become: false
+  local_action:
+    module: hasnimehdi91.keepass.secret_reader
+    db_path: "{{ password_database_file }}"
+    db_password: "{{ password_database_password }}"
+    secret_path: "{{ rails_database.password_kp_path }}"
+  register: database_password_secret
+
+- name: Database configuration
+  template:
+    src: database.yml.j2
+    dest: /srv/{{ rails_app_name }}/shared/config/database.yml
+    owner: "{{ rails_app_name }}"
+    group: deploy
+    mode: 0o660
+  vars:
+    kp_key_name: "{{ rails_database.password_kp_path | split('/') | last }}"

@@ -7,3 +7,9 @@
     vars:
       rails_app_name: umaps-rails
       rails_production_key_kp_path: rails/umaps-rails/production.key
+      rails_database:
+        database: umaps-rails-production
+        host: umwebdb.umass.edu
+        port: 3308
+        username: umaps-rail-production
+        password_kp_path: databases/umaps-rails
