@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 ansible = "*"
+pykeepass = "4.0.3"
 
 [dev-packages]
 
