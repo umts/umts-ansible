@@ -1,0 +1,7 @@
+---
+- name: MariaDB client and libs
+  yum:
+    name:
+      - mariadb
+      - mariadb-devel
+    state: present
