@@ -41,7 +41,8 @@ Vagrant.configure('2') do |config|
   config.vm.provision 'shell', inline: <<~SHELL
     if ! sudo subscription-manager status; then
       sudo subscription-manager register --username=#{ENV.fetch 'RHSM_USER'} \
-           --password=#{ENV.fetch 'RHSM_PASSWORD'} --auto-attach
+           --password=#{ENV.fetch 'RHSM_PASSWORD'} --auto-attach \
+           --name='vagrant-rhel9-#{ENV.fetch 'RHSM_USER'}'
       sudo yum install -y insights-client
       sudo insights-client --register
     fi
