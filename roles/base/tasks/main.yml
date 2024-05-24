@@ -1,3 +1,7 @@
+- name: CodeReady Linux Builder repo
+  rhsm_repository:
+    name: codeready-builder-for-rhel-9-x86_64-rpms
+    state: enabled
 - name: Base required packages
   yum:
     state: present

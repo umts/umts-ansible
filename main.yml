@@ -3,6 +3,10 @@
   become: yes
   roles:
   - base
+  - role: ruby
+    vars:
+      ruby_version: '3.1.4'
+      ruby_make_default: true
   - role: rails-app
     vars:
       rails_app_name: umaps-rails

@@ -1,0 +1,36 @@
+---
+- name: Rubies directory
+  file:
+    path: /opt/rubies
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Install Ruby
+  command:
+    cmd: >
+      /usr/local/bin/ruby-install
+      --rubies-dir /opt/rubies
+      ruby {{ ruby_version }}
+    creates: /opt/rubies/ruby-{{ ruby_version }}
+
+- name: Update Rubygems
+  command:
+    cmd: /opt/rubies/ruby-{{ ruby_version }}/bin/gem update --system
+  register: rubygems_update
+  changed_when: rubygems_update.stdout is not search('Latest version already installed')
+
+- name: Default Ruby
+  file:
+    src: /opt/rubies/ruby-{{ ruby_version }}
+    dest: /opt/ruby
+    state: link
+    force: yes
+  when: ruby_make_default
+
+- name: Opt ruby in path
+  copy:
+    dest: /etc/profile.d/opt-ruby.sh
+    src: opt-ruby.sh
+    mode: 0644

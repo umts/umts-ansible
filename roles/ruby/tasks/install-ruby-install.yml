@@ -1,0 +1,10 @@
+---
+- name: Download and extract ruby-install
+  unarchive:
+    src: "https://github.com/postmodern/ruby-install/releases/download/v{{ ruby_install_version }}/ruby-install-{{ ruby_install_version }}.tar.gz"
+    dest: "/usr/local/src"
+    remote_src: true
+- name: Install ruby-install
+  make:
+    chdir: "/usr/local/src/ruby-install-{{ ruby_install_version }}"
+    target: install

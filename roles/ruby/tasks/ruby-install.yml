@@ -1,0 +1,19 @@
+---
+- name: Get current ruby-install version
+  command: /usr/local/bin/ruby-install --version
+  register: ruby_install_current_version
+  ignore_errors: true
+  changed_when: false
+
+- name: Force reinstall ruby-install if wrong version
+  set_fact:
+    reinstall_ruby_install: true
+  when: >
+    ruby_install_current_version is succeeded and
+    (ruby_install_current_version.stdout | regex_replace('ruby-install: ([0-9.]+)', '\\1'))
+      is version(ruby_install_version, '<')
+
+- include_tasks: install-ruby-install.yml
+  when: >
+    ruby_install_current_version is failed or
+    reinstall_ruby_install | default(false)
