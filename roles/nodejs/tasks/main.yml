@@ -1,0 +1,44 @@
+---
+- name: Nodesource repository
+  yum_repository:
+    name: nodesource-nodejs
+    description: Node.js Packages for Linux RPM based distros - {{ ansible_architecture }}
+    baseurl: "https://rpm.nodesource.com/pub_{{ node_version }}/nodistro/nodejs/{{ ansible_architecture }}"
+    priority: 9
+    gpgcheck: true
+    gpgkey: 'https://rpm.nodesource.com/gpgkey/ns-operations-public.key'
+    enabled: true
+    state: present
+    module_hotfixes: true
+  register: nodesource_nodejs_repo
+
+- name: Nodesource NSolid repository
+  yum_repository:
+    name: nodesource-nsolid
+    description: N|Solid Packages for Linux RPM based distros - {{ ansible_architecture }}
+    baseurl: "https://rpm.nodesource.com/pub_{{ node_version }}/nodistro/nsolid/{{ ansible_architecture }}"
+    priority: 9
+    gpgcheck: true
+    gpgkey: 'https://rpm.nodesource.com/gpgkey/ns-operations-public.key'
+    enabled: true
+    state: present
+    module_hotfixes: true
+  register: nodesource_nsolid_repo
+
+- name: Make yum cache
+  command: >
+    yum makecache --disablerepo='*'
+                  --enablerepo='nodesource-nodejs'
+                  --enablerepo='nodesource-nsolid'
+  when: nodesource_nodejs_repo.changed or nodesource_nsolid_repo.changed
+
+- name: Install Node.js
+  yum:
+    name: nodejs
+    state: present
+
+- name: Install yarn
+  npm:
+    name: yarn
+    global: yes
+  when: install_yarn

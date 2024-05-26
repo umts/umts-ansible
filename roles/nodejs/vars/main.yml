@@ -1,0 +1,3 @@
+---
+node_version: '20.x'
+install_yarn: false
