@@ -1,0 +1,18 @@
+[Unit]
+Description=sidekiq
+After=syslog.target network.target redis.service
+
+[Service]
+Type=notify
+WatchdogSec=10
+WorkingDirectory=/srv/{{ rails_app_name }}/current
+ExecStart=/opt/ruby/bin/bundle exec sidekiq -C config/sidekiq.yml -e production
+ExecReload=/bin/kill -TSTP $MAINPID
+
+RestartSec=1
+Restart=on-failure
+
+SyslogIdentifier=sidekiq
+
+[Install]
+WantedBy=multi-user.target

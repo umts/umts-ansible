@@ -6,7 +6,7 @@
 - name: Redis service
   systemd:
     name: redis.service
-    enabled: yes
+    enabled: true
     state: started
 
 - name: Sidekiq config
@@ -16,3 +16,17 @@
     owner: "{{ rails_app_name }}"
     group: deploy
     mode: 0o664
+
+- name: Sidekiq systemd unit
+  template:
+    src: sidekiq.service.j2
+    dest: /etc/systemd/system/sidekiq-{{ rails_app_name }}.service
+    owner: root
+    group: root
+    mode: 0o644
+
+- name: Sidekiq service
+  systemd:
+    name: sidekiq-{{ rails_app_name }}
+    enabled: true
+    daemon_reload: true
