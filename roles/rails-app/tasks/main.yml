@@ -77,7 +77,9 @@
     db_password: "{{ password_database_password }}"
     secret_path: "{{ rails_database.password_kp_path }}"
   register: database_password_secret
-  when: database_config_stat.stat.exists == false
+  when: >
+    database_config_stat.stat.exists == false
+    and not rails_database.password is defined
 - name: Database configuration
   template:
     src: database.yml.j2
@@ -85,8 +87,6 @@
     owner: "{{ rails_app_name }}"
     group: deploy
     mode: 0o660
-  vars:
-    kp_key_name: "{{ rails_database.password_kp_path | split('/') | last }}"
   when: database_config_stat.stat.exists == false
 
 - include_tasks: sidekiq.yml

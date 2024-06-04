@@ -4,6 +4,11 @@ production:
   host: {{ rails_database.host }}
   port: {{ rails_database.port }}
   username: {{ rails_database.username }}
-  password: {{ database_password_secret.secret[kp_key_name].password }}
+  {% if rails_database.password is defined and rails_database.password -%}
+  password: {{ rails_database.password }}
+  {% else -%}
+  {% set name = rails_database.password_kp_path | split('/') | last -%}
+  password: {{ database_password_secret.secret[name].password }}
+  {% endif -%}
   pool: 20
   reconnect: true
