@@ -21,6 +21,15 @@
     name: deploy
     state: present
 
+- name: Allow deploy group to sudo
+  copy:
+    src: deploy_sudo
+    dest: /etc/sudoers.d/deploy
+    owner: root
+    group: root
+    mode: 0440
+    validate: visudo -cf %s
+
 - name: Vagrant user in deploy group
   user:
     name: vagrant

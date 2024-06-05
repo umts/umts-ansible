@@ -34,3 +34,12 @@
     dest: /etc/profile.d/opt-ruby.sh
     src: opt-ruby.sh
     mode: 0644
+
+- name: Opt ruby for sudo
+  copy:
+    src: opt_ruby_sudo
+    dest: /etc/sudoers.d/opt-ruby
+    owner: root
+    group: root
+    mode: 0440
+    validate: visudo -cf %s
