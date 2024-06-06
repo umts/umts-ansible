@@ -10,7 +10,9 @@
   - role: nodejs
     vars:
       node_version: '20.x'
+  - apache
   - mariadb
+  - passenger
   - role: rails-app
     vars:
       rails_app_name: umaps-rails

@@ -1,0 +1,21 @@
+---
+- name: Install Apache
+  yum:
+    name: httpd
+    state: present
+
+- name: Start Apache
+  service:
+    name: httpd
+    state: started
+    enabled: true
+
+- name: Disable default configs
+  copy:
+    dest: "/etc/httpd/conf.d/{{ item }}.conf"
+    content: "# This file intentionally left blank"
+  with_items:
+    - welcome
+    - userdir
+    - autoindex
+  notify: reload apache

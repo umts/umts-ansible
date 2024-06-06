@@ -1,0 +1,29 @@
+---
+- name: Enable EPEL
+  yum:
+    name: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_facts['distribution_major_version'] }}.noarch.rpm"
+    state: present
+
+- name: Passenger repository
+  yum_repository:
+    name: passenger
+    description: Passenger
+    baseurl: "https://oss-binaries.phusionpassenger.com/yum/passenger/el/$releasever/$basearch"
+    repo_gpgcheck: true
+    gpgcheck: false
+    gpgkey: "https://oss-binaries.phusionpassenger.com/auto-software-signing-gpg-key.txt"
+    sslverify: true
+    sslcacert: /etc/pki/tls/certs/ca-bundle.crt
+    enabled: true
+    state: present
+
+- name: Install Passenger
+  yum:
+    name: mod_passenger
+    state: present
+
+- name: Passenger config
+  copy:
+    dest: /etc/httpd/conf.d/passenger.conf
+    src: passenger.conf
+  notify: reload apache
