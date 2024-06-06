@@ -19,3 +19,17 @@
     - userdir
     - autoindex
   notify: reload apache
+
+- name: Apache config
+  template:
+    src: httpd.conf.j2
+    dest: /etc/httpd/conf/httpd.conf
+  notify: reload apache
+
+- name: Sites directories
+  file:
+    path: "/etc/httpd/{{ item }}"
+    state: directory
+  with_items:
+    - sites-available
+    - sites-enabled
