@@ -1,0 +1,32 @@
+---
+- name: Credentials directory
+  file:
+    path: /srv/{{ rails_app_name }}/shared/config/credentials
+    state: directory
+    owner: "{{ rails_app_name }}"
+    group: deploy
+    mode: 0o6775
+
+- name: Production key presence
+  stat:
+    path: /srv/{{ rails_app_name }}/shared/config/credentials/production.key
+  register: production_key_stat
+
+- name: Read production key
+  become: false
+  local_action:
+    module: hasnimehdi91.keepass.secret_reader
+    db_path: "{{ password_database_file }}"
+    db_password: "{{ password_database_password }}"
+    secret_path: "{{ rails_production_key_kp_path }}"
+  register: production_key_secret
+  when: production_key_stat.stat.exists == false
+
+- name: Production key
+  copy:
+    dest: /srv/{{ rails_app_name }}/shared/config/credentials/production.key
+    content: "{{ production_key_secret.secret['production.key'].password }}"
+    owner: "{{ rails_app_name }}"
+    group: deploy
+    mode: 0o660
+  when: production_key_stat.stat.exists == false

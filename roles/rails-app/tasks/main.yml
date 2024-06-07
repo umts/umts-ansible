@@ -33,59 +33,19 @@
     owner: "{{ rails_app_name }}"
     group: deploy
     mode: 0o6775
+
 - name: Config directory
   file:
-    path: /srv/{{ rails_app_name }}/shared/config/credentials
+    path: /srv/{{ rails_app_name }}/shared/config
     state: directory
     owner: "{{ rails_app_name }}"
     group: deploy
     mode: 0o6775
 
-- name: Production key presence
-  stat:
-    path: /srv/{{ rails_app_name }}/shared/config/credentials/production.key
-  register: production_key_stat
-- name: Read production key
-  become: false
-  local_action:
-    module: hasnimehdi91.keepass.secret_reader
-    db_path: "{{ password_database_file }}"
-    db_password: "{{ password_database_password }}"
-    secret_path: "{{ rails_production_key_kp_path }}"
-  register: production_key_secret
-  when: production_key_stat.stat.exists == false
-- name: Production key
-  copy:
-    dest: /srv/{{ rails_app_name }}/shared/config/credentials/production.key
-    content: "{{ production_key_secret.secret['production.key'].password }}"
-    owner: "{{ rails_app_name }}"
-    group: deploy
-    mode: 0o660
-  when: production_key_stat.stat.exists == false
+- import_tasks: production_key.yml
+- import_tasks: database_config.yml
 
-- name: Database config presence
-  stat:
-    path: /srv/{{ rails_app_name }}/shared/config/database.yml
-  register: database_config_stat
-- name: Read database password
-  become: false
-  local_action:
-    module: hasnimehdi91.keepass.secret_reader
-    db_path: "{{ password_database_file }}"
-    db_password: "{{ password_database_password }}"
-    secret_path: "{{ rails_database.password_kp_path }}"
-  register: database_password_secret
-  when: >
-    database_config_stat.stat.exists == false
-    and not rails_database.password is defined
-- name: Database configuration
-  template:
-    src: database.yml.j2
-    dest: /srv/{{ rails_app_name }}/shared/config/database.yml
-    owner: "{{ rails_app_name }}"
-    group: deploy
-    mode: 0o660
-  when: database_config_stat.stat.exists == false
+- include_tasks: site_config.yml
 
 - include_tasks: sidekiq.yml
   when: rails_needs_sidekiq == true

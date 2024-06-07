@@ -1,0 +1,26 @@
+---
+- name: Database config presence
+  stat:
+    path: /srv/{{ rails_app_name }}/shared/config/database.yml
+  register: database_config_stat
+
+- name: Read database password
+  become: false
+  local_action:
+    module: hasnimehdi91.keepass.secret_reader
+    db_path: "{{ password_database_file }}"
+    db_password: "{{ password_database_password }}"
+    secret_path: "{{ rails_database.password_kp_path }}"
+  register: database_password_secret
+  when: >
+    database_config_stat.stat.exists == false
+    and not rails_database.password is defined
+
+- name: Database configuration
+  template:
+    src: database.yml.j2
+    dest: /srv/{{ rails_app_name }}/shared/config/database.yml
+    owner: "{{ rails_app_name }}"
+    group: deploy
+    mode: 0o660
+  when: database_config_stat.stat.exists == false
