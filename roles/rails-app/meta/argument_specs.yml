@@ -1,0 +1,40 @@
+---
+argument_specs:
+  main:
+    options:
+      rails_app_name:
+        required: true
+        type: str
+      rails_production_key_kp_path:
+        description: >
+          The path to the production.key value within the password database
+        required: true
+        type: str
+      rails_database:
+        required: true
+        type: dict
+        options:
+          database:
+            required: true
+            type: str
+          host:
+            required: true
+            type: str
+          port:
+            required: true
+            type: int
+          username:
+            required: true
+            type: str
+          password:
+            desciption: >
+              The password to the database. If ommmitted, the password will
+              be retrieved from the password database.
+            required: false
+            type: str
+          password_kp_path:
+            description: >
+              The path to the password within the password database. Can be
+              omitted if the password is provided directly.
+            required: false
+            type: str

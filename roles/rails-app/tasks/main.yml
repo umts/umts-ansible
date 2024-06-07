@@ -1,15 +1,4 @@
 ---
-- name: Require variables
-  assert:
-    that:
-      - "item is defined"
-      - "item != ''"
-    msg: "{{ item }} is required"
-  with_items:
-    - rails_app_name
-    - rails_production_key_kp_path
-    - rails_database
-
 - name: App user
   user:
     name: "{{ rails_app_name }}"
