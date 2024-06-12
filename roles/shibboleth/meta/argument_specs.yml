@@ -1,0 +1,20 @@
+---
+argument_specs:
+  main:
+    options:
+      shibboleth_sp_description:
+        description: Description of the Shibboleth Service Provider
+        required: false
+        type: str
+      shibboleth_idp_host:
+        description: Hostname of the Shibboleth Identity Provider
+        required: true
+        type: str
+      shibboleth_idp_entity_id:
+        description: Entity ID of the Shibboleth Identity Provider
+        required: true
+        type: str
+      shibboleth_idp_metadata_url:
+        description: URL of the Shibboleth Identity Provider metadata
+        required: true
+        type: str

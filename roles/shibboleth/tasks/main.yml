@@ -1,0 +1,80 @@
+---
+- name: Shibboleth repository
+  yum_repository:
+    name: shibboleth
+    description: Shibboleth
+    mirrorlist: "http://shibboleth.net/cgi-bin/mirrorlist.cgi/rockylinux{{ ansible_facts['distribution_major_version'] }}"
+    gpgcheck: true
+    gpgkey: |-
+      https://shibboleth.net/downloads/service-provider/RPMS/repomd.xml.key
+      https://shibboleth.net/downloads/service-provider/RPMS/cantor.repomd.xml.key
+    enabled: true
+    state: present
+
+- name: Install Shibboleth
+  yum:
+    name: shibboleth
+    state: present
+
+- name: Shibboleth service
+  systemd:
+    name: shibd
+    enabled: true
+    state: started
+
+- name: Generate SP signing key
+  command:
+    chdir: /etc/shibboleth
+    cmd: ./keygen.sh -b -n sp-signing -u shibd -g shibd
+    creates: /etc/shibboleth/sp-signing-key.pem
+  notify: restart shibd
+
+- name: Generate SP encryption key
+  command:
+    chdir: /etc/shibboleth
+    cmd: ./keygen.sh -b -n sp-encrypt -u shibd -g shibd
+    creates: /etc/shibboleth/sp-encrypt-key.pem
+  notify: restart shibd
+
+- name: Generate SP metadata
+  shell:
+    chdir: /etc/shibboleth
+    cmd: >
+      ./metagen.sh -c sp-signing-key.pem
+      -h "{{ ansible_facts['fqdn'] }}"
+      {{ ('-U -y ' + shibboleth_sp_description) if shibboleth_sp_description is defined else '' }}
+      -a "{{ admin_name }}//{{ admin_email }}"
+      | tee {{ ansible_facts['fqdn']}}-metadata.xml
+    creates: /etc/shibboleth/{{ ansible_facts['fqdn'] }}-metadata.xml
+  notify: restart shibd
+
+- name: Configure Shibboleth
+  template:
+    src: shibboleth2.xml.j2
+    dest: /etc/shibboleth/shibboleth2.xml
+  notify: restart shibd
+
+- name: Shibboleth attribute map
+  template:
+    src: attribute-map.xml.j2
+    dest: /etc/shibboleth/attribute-map.xml
+  vars:
+    attribute_map: >
+      {{ lookup('community.general.merge_variables',
+                '__shibboleth_attributes',
+                pattern_type = 'suffix',
+                initial_value = shibboleth_attributes) }}
+  notify: restart shibd
+
+- name: Shibboleth Apache module config
+  copy:
+    dest: /etc/httpd/conf.modules.d/10-shib.conf
+    content: |
+      LoadModule mod_shib /usr/lib64/shibboleth/mod_shib_24.so
+  notify: reload apache
+
+- name: Shibboleth Apache config
+  copy:
+    dest: /etc/httpd/conf.d/shib.conf
+    src: shib.conf
+  notify: reload apache

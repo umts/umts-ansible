@@ -11,6 +11,12 @@
     vars:
       node_version: '20.x'
   - apache
+  - role: shibboleth
+    vars:
+      shibboleth_sp_description: "UMass Parking Hub"
+      shibboleth_idp_host: webauth.umass.edu
+      shibboleth_idp_entity_id: 'https://webauth.umass.edu/idp/shibboleth'
+      shibboleth_idp_metadata_url: 'https://webauth.umass.edu/idp/shibboleth'
   - mariadb
   - passenger
   - role: rails-app
