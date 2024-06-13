@@ -33,3 +33,12 @@
   with_items:
     - sites-available
     - sites-enabled
+
+- name: Allow web traffic
+  firewalld:
+    service: "{{ item }}"
+    permanent: true
+    state: enabled
+  with_items:
+    - http
+    - https

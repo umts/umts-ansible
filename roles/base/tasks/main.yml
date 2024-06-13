@@ -8,3 +8,9 @@
     state: present
     pkg:
       - git
+
+- name: Firewalld
+  service:
+    name: firewalld
+    state: started
+    enabled: yes
