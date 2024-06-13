@@ -16,6 +16,11 @@ Vagrant.configure('2') do |config|
       ansible.compatibility_mode = '2.0'
       ansible.playbook = 'main.yml'
       ansible.galaxy_role_file = 'requirements.yml'
+      ansible.groups = {
+        'umts_servers' => ['web'],
+        'rails_apps' => ['web'],
+        'umaps_rails' => ['web']
+      }
       ansible.extra_vars = {
         running_in_vagrant: true,
         rails_database: {

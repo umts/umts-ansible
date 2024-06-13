@@ -1,8 +1,19 @@
 ---
-- hosts: all
+- hosts: umts_servers
+  become: true
+  roles:
+    - base
+
+- hosts: rails_apps
+  become: true
+  roles:
+  - apache
+  - mariadb
+  - passenger
+
+- hosts: umaps_rails
   become: yes
   roles:
-  - base
   - role: ruby
     vars:
       ruby_version: '3.1.4'
@@ -10,15 +21,12 @@
   - role: nodejs
     vars:
       node_version: '20.x'
-  - apache
   - role: shibboleth
     vars:
       shibboleth_sp_description: "UMass Parking Hub"
       shibboleth_idp_host: webauth.umass.edu
       shibboleth_idp_entity_id: 'https://webauth.umass.edu/idp/shibboleth'
       shibboleth_idp_metadata_url: 'https://webauth.umass.edu/idp/shibboleth'
-  - mariadb
-  - passenger
   - role: rails-app
     vars:
       rails_app_name: umaps-rails
