@@ -30,6 +30,7 @@
   - role: rails-app
     vars:
       rails_app_name: umaps-rails
+      rails_app_domain: hub.parking.umass.edu
       rails_production_key_kp_path: rails/umaps-rails/production.key
       rails_database:
         database: umaps-rails-production

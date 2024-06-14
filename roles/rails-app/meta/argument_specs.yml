@@ -5,6 +5,9 @@ argument_specs:
       rails_app_name:
         required: true
         type: str
+      rails_app_domain:
+        required: true
+        type: str
       rails_production_key_kp_path:
         description: >
           The path to the production.key value within the password database

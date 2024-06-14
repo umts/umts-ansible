@@ -1,0 +1,39 @@
+<VirtualHost *:80>
+   SSLEngine Off
+   ServerName {{ rails_app_domain }}
+   Redirect permanent / https://{{ rails_app_domain }}/
+</VirtualHost>
+
+<VirtualHost *:443>
+  SSLEngine On
+  SSLCertificateFile /etc/letsencrypt/live/{{ rails_app_domain }}/cert.pem
+  SSLCertificateChainFile /etc/letsencrypt/live/{{ rails_app_domain }}/chain.pem
+  SSLCertificateKeyFile /etc/letsencrypt/live/{{ rails_app_domain }}/privkey.pem
+
+  ServerName {{ rails_app_domain }}
+  DocumentRoot /srv/{{ rails_app_name }}/current/public
+
+  RailsEnv production
+
+  <Directory /{{ rails_app_name }}/current/public>
+    Options FollowSymLinks
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+  </Directory>
+
+  LogLevel notice
+
+  <Location />
+    AuthType shibboleth
+    ShibRequestSetting requireSession 1
+    Require shibboleth
+  </Location>
+
+  <LocationMatch "^/(assets|garage_status_logs.csv|gis|surveys(?!/csv)|time_machine|time_off_requests|timesheets|tpp/guest)">
+    Satisfy Any
+    Allow From All
+    AuthType None
+    Require all granted
+  </LocationMatch>
+</VirtualHost>

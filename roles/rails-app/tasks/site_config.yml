@@ -1,0 +1,16 @@
+---
+- name: Apache site config
+  template:
+    src: apache_site.j2
+    dest: /etc/httpd/sites-available/{{ rails_app_name }}.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: reload apache
+
+- name: Enable site
+  file:
+    src: /etc/httpd/sites-available/{{ rails_app_name }}.conf
+    dest: /etc/httpd/sites-enabled/{{ rails_app_name }}.conf
+    state: link
+  notify: reload apache

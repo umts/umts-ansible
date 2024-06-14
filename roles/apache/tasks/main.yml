@@ -1,8 +1,10 @@
 ---
 - name: Install Apache
   yum:
-    name: httpd
     state: present
+    pkg:
+      - httpd
+      - mod_ssl
 
 - name: Start Apache
   service:
@@ -24,6 +26,12 @@
   template:
     src: httpd.conf.j2
     dest: /etc/httpd/conf/httpd.conf
+  notify: reload apache
+
+- name: SSL config
+  copy:
+    src: ssl.conf
+    dest: /etc/httpd/conf.d/ssl.conf
   notify: reload apache
 
 - name: Sites directories

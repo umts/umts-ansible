@@ -7,6 +7,7 @@
   yum:
     state: present
     pkg:
+      - bash-completion
       - git
 
 - name: Firewalld
