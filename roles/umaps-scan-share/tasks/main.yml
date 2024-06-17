@@ -2,6 +2,11 @@
 - name: Include base vars
   include_vars: "{{ role_path }}/../base/vars/main.yml"
 
+- name: Required packages
+  package:
+    name: cifs-utils
+    state: present
+
 - name: Scans directory
   file:
     path: /mnt/scan_database
@@ -48,7 +53,7 @@
 
 - name: Mount scan database
   mount:
-    src: "//af-scan.campus.ads.umass.edu/ScanShare/Parking/Scan\\040Database/"
+    src: '//af-scan.campus.ads.umass.edu/ScanShare/Parking/Scan Database/'
     path: /mnt/scan_database
     fstype: cifs
     boot: false
