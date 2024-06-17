@@ -24,7 +24,7 @@
     name: vagrant
     groups: deploy
     append: yes
-  when: running_in_vagrant == true
+  when: running_in_vagrant is defined and running_in_vagrant == true
 
 - name: Deployment directory
   file:
