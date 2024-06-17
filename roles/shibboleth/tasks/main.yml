@@ -66,6 +66,32 @@
                 initial_value = shibboleth_attributes) }}
   notify: restart shibd
 
+- name: Shibd selinux policy text
+  copy:
+    dest: /etc/selinux/mod_shib_to_shibd.te
+    src: mod_shib_to_shibd.te
+
+- name: Shibd selinux policy
+  command:
+    cmd: checkmodule -M -m -o /etc/selinux/mod_shib_to_shibd.mod /etc/selinux/mod_shib_to_shibd.te
+    creates: /etc/selinux/mod_shib_to_shibd.mod
+
+- name: Package shibd selinux policy
+  command:
+    cmd: semodule_package -o /etc/selinux/mod_shib_to_shibd.pp -m /etc/selinux/mod_shib_to_shibd.mod
+    creates: /etc/selinux/mod_shib_to_shibd.pp
+
+- name: Installed selinux policy
+  shell:
+    cmd: semodule -l | grep -q mod_shib_to_shibd
+  register: selinux_policy
+  ignore_errors: true
+
+- name: Install shibd selinux policy
+  command:
+    cmd: semodule -i /etc/selinux/mod_shib_to_shibd.pp
+  when: selinux_policy.rc != 0
+
 - name: Shibboleth Apache module config
   copy:
     dest: /etc/httpd/conf.modules.d/10-shib.conf
