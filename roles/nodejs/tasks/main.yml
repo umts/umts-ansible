@@ -1,4 +1,11 @@
 ---
+- name: Remove conflicting packages
+  yum:
+    state: absent
+    pkg:
+      - npm
+      - nodejs-full-i18n
+
 - name: Nodesource repository
   yum_repository:
     name: nodesource-nodejs
