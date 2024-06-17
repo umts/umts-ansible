@@ -86,6 +86,7 @@
     cmd: semodule -l | grep -q mod_shib_to_shibd
   register: selinux_policy
   ignore_errors: true
+  changed_when: false
 
 - name: Install shibd selinux policy
   command:

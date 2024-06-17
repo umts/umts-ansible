@@ -9,7 +9,6 @@
   roles:
   - apache
   - mariadb
-  - passenger
 
 - hosts: umaps_rails
   become: yes
@@ -18,6 +17,7 @@
     vars:
       ruby_version: '3.1.4'
       ruby_make_default: true
+  - passenger
   - role: nodejs
     vars:
       node_version: '20.x'
@@ -47,3 +47,4 @@
         username: umaps-rail-production
         password_kp_path: databases/umaps-rails
       rails_needs_sidekiq: true
+  - umaps-scan-share

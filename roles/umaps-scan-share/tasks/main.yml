@@ -1,0 +1,73 @@
+---
+- name: Include base vars
+  include_vars: "{{ role_path }}/../base/vars/main.yml"
+
+- name: Scans directory
+  file:
+    path: /mnt/scan_database
+    state: directory
+
+- name: Check for mount
+  shell:
+    cmd: mount | grep /mnt/scan_database
+  register: mount_check
+  ignore_errors: true
+  changed_when: false
+
+- name: Unmounted semaphore
+  file:
+    path: /mnt/scan_database/.NOT_MOUNTED
+    state: touch
+  when: mount_check.rc != 0
+
+- name: Mount credentails presence
+  stat:
+    path: /etc/scan-database-credentials.txt
+  register: mount_credentials_stat
+
+- name: Read scan database password
+  become: false
+  local_action:
+    module: hasnimehdi91.keepass.secret_reader
+    db_path: "{{ password_database_file }}"
+    db_password: "{{ password_database_password }}"
+    secret_path: parking/af-scan
+  register: scan_database_secret
+  when: mount_credentials_stat.stat.exists == false
+
+- name: Mount credentials
+  copy:
+    dest: /etc/scan-database-credentials.txt
+    content: |
+      username=af-psscript
+      domain=CAMPUS
+      password={{ scan_database_secret.secret['af-scan'].password }}
+    owner: root
+    mode: 0o600
+  when: mount_credentials_stat.stat.exists == false
+
+- name: Mount scan database
+  mount:
+    src: "//af-scan.campus.ads.umass.edu/ScanShare/Parking/Scan\\040Database/"
+    path: /mnt/scan_database
+    fstype: cifs
+    boot: false
+    opts: "{{ scans_mount_opts | join(',') }}"
+    state: present
+  vars:
+    scans_mount_opts:
+      - credentials=/etc/scan-database-credentials.txt
+      - uid=umaps-rails
+      - dir_mode=0755
+      - file_mode=0644
+      - nounix
+      - vers=3.0
+      - x-systemd.automount
+      - x-systemd.idle-timeout=60
+
+- name: Scans automount unit
+  systemd:
+    name: mnt-scan_database.automount
+    enabled: yes
+    state: started
+    daemon_reload: yes

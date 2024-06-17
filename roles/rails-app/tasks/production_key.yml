@@ -1,4 +1,7 @@
 ---
+- name: Include base vars
+  include_vars: "{{ role_path }}/../base/vars/main.yml"
+
 - name: Credentials directory
   file:
     path: /srv/{{ rails_app_name }}/shared/config/credentials
