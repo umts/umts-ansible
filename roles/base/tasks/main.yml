@@ -9,6 +9,8 @@
     pkg:
       - bash-completion
       - git
+      - vim
+      - "@development"
 
 - name: Firewalld
   service:
