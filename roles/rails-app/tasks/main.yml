@@ -45,6 +45,7 @@
 - import_tasks: production_key.yml
 - import_tasks: database_config.yml
 - import_tasks: site_config.yml
+- import_tasks: logrotate.yml
 
 - include_tasks: sidekiq.yml
   when: rails_needs_sidekiq == true

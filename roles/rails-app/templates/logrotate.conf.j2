@@ -1,0 +1,10 @@
+/srv/{{ rails_app_name }}/shared/log/*.log {
+  weekly
+  missingok
+  rotate 52
+  nodateext
+  compress
+  delaycompress
+  notifempty
+  copytruncate
+}
