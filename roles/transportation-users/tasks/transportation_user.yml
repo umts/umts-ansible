@@ -1,0 +1,23 @@
+---
+- name: "Add transportation user, {{ transportation_user.name }}"
+  user:
+    name: "{{ transportation_user.name }}"
+    comment: "{{ transportation_user.comment }}"
+    groups: "{{ transportation_user.groups }}"
+    state: present
+
+- name: "Create SSH directory for {{ transportation_user.name }}"
+  file:
+    path: "/home/{{ transportation_user.name }}/.ssh"
+    state: directory
+    owner: "{{ transportation_user.name }}"
+    group: "{{ transportation_user.name }}"
+    mode: 0o700
+
+- name: "Add SSH keys for {{ transportation_user.name }}"
+  copy:
+    dest: "/home/{{ transportation_user.name }}/.ssh/authorized_keys"
+    content: "{{ transportation_user['ssh-keys'] | join('\n') }}"
+    owner: "{{ transportation_user.name }}"
+    group: "{{ transportation_user.name }}"
+    mode: 0o600

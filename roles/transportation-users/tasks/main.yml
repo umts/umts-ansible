@@ -1,0 +1,26 @@
+---
+- name: Admin group
+  group:
+    name: admin
+    state: present
+
+- name: Allow admins to sudo
+  copy:
+    src: local_admin_sudo
+    dest: /etc/sudoers.d/local_admin
+    owner: root
+    group: root
+    mode: 0440
+    validate: visudo -cf %s
+
+- name: Add new transportation users
+  include_tasks: transportation_user.yml
+  vars:
+    transportation_user: "{{ item }}"
+  loop: "{{ transportation_users.present | default([], true)}}"
+
+- name: Remove old transportation users
+  user:
+    name: "{{ item }}"
+    state: absent
+  loop: "{{ transportation_users.absent | default([], true) }}"

@@ -3,6 +3,7 @@
   become: true
   roles:
     - base
+    - transportation-users
 
 - hosts: rails_apps
   become: true
