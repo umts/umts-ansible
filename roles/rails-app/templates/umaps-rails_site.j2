@@ -1,0 +1,6 @@
+  <LocationMatch "^/(assets|garage_status_logs.csv|gis|surveys(?!/csv)|time_machine|time_off_requests|timesheets|tpp/guest)">
+    Satisfy Any
+    Allow From All
+    AuthType None
+    Require all granted
+  </LocationMatch>
