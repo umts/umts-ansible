@@ -19,15 +19,15 @@ Vagrant.configure('2') do |config|
       ansible.groups = {
         'umts_servers' => ['web'],
         'rails_apps' => ['web'],
-        'umaps_rails' => ['web']
+        'round_three' => ['web']
       }
       ansible.extra_vars = {
         running_in_vagrant: true,
         rails_database: {
-          database: 'umaps_rails_production',
+          database: 'application_production',
           host: '10.19.69.20',
           port: 3306,
-          username: 'umaps-rails',
+          username: 'my_application',
           password: 'PASSWORD'
         }
       }
