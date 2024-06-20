@@ -7,44 +7,83 @@
 - hosts: rails_apps
   become: true
   roles:
-  - apache
-  - mariadb
+    - apache
+    - mariadb
 
 - hosts: umaps_rails
-  become: yes
+  become: true
   roles:
-  - role: ruby
-    vars:
-      ruby_version: '3.1.4'
-      ruby_make_default: true
-  - passenger
-  - role: nodejs
-    vars:
-      node_version: '20.x'
-  - role: shibboleth
-    vars:
-      shibboleth_sp_description: "UMass Parking Hub"
-      shibboleth_idp_host: webauth.umass.edu
-      shibboleth_idp_entity_id: 'https://webauth.umass.edu/idp/shibboleth'
-      shibboleth_idp_metadata_url: 'https://webauth.umass.edu/idp/shibboleth'
-  - role: umass_it.common.certbot
-    vars:
-      certificate_fqdns:
-        #- "{{ ansible_fqdn }}"
-        - hub.parking.umass.edu
-      acme_server: "https://acme.sectigo.com/v2/InCommonRSAOV"
-      acme_eab_kid: "{{ lookup('env', 'ACME_EAB_KID') }}"
-      acme_eab_hmac_key: "{{ lookup('env', 'ACME_EAB_HMAC_KEY') }}"
-  - role: rails-app
-    vars:
-      rails_app_name: umaps-rails
-      rails_app_domain: hub.parking.umass.edu
-      rails_production_key_kp_path: rails/umaps-rails/production.key
-      rails_database:
-        database: umaps-rails-production
-        host: umwebdb.umass.edu
-        port: 3308
-        username: umaps-rail-production
-        password_kp_path: databases/umaps-rails
-      rails_needs_sidekiq: true
-  - umaps-scan-share
+    - role: ruby
+      vars:
+        ruby_version: '3.1.4'
+        ruby_make_default: true
+    - passenger
+    - role: nodejs
+      vars:
+        node_version: '20.x'
+    - role: shibboleth
+      vars:
+        shibboleth_sp_description: "UMass Parking Hub"
+        shibboleth_idp_host: webauth.umass.edu
+        shibboleth_idp_entity_id: 'https://webauth.umass.edu/idp/shibboleth'
+        shibboleth_idp_metadata_url: 'https://webauth.umass.edu/idp/shibboleth'
+    - role: umass_it.common.certbot
+      vars:
+        certificate_fqdns:
+          # - "{{ ansible_fqdn }}"
+          - hub.parking.umass.edu
+        acme_server: "https://acme.sectigo.com/v2/InCommonRSAOV"
+        acme_eab_kid: "{{ lookup('env', 'ACME_EAB_KID') }}"
+        acme_eab_hmac_key: "{{ lookup('env', 'ACME_EAB_HMAC_KEY') }}"
+    - role: rails-app
+      vars:
+        rails_app_name: umaps-rails
+        rails_app_domain: hub.parking.umass.edu
+        rails_production_key_kp_path: rails/umaps-rails/production.key
+        rails_database:
+          database: umaps-rails-production
+          host: umwebdb.umass.edu
+          port: 3308
+          username: umaps-rail-production
+          password_kp_path: databases/umaps-rails
+        rails_needs_sidekiq: true
+    - umaps-scan-share
+
+- hosts: round_three
+  become: true
+  roles:
+    - role: ruby
+      vars:
+        ruby_version: '3.1.4'
+        ruby_make_default: true
+    - passenger
+    - role: nodejs
+      vars:
+        node_version: '20.x'
+    - role: shibboleth
+      vars:
+        shibboleth_sp_description: "umasstransit.org"
+        shibboleth_idp_host: webauth.umass.edu
+        shibboleth_idp_entity_id: 'https://webauth.umass.edu/idp/shibboleth'
+        shibboleth_idp_metadata_url: 'https://webauth.umass.edu/idp/shibboleth'
+    - role: umass_it.common.certbot
+      vars:
+        certificate_fqdns:
+          # - "{{ ansible_fqdn }}"
+          - umasstransit.org
+          - www.umasstransit.org
+        acme_server: "https://acme.sectigo.com/v2/InCommonRSAOV"
+        acme_eab_kid: "{{ lookup('env', 'ACME_EAB_KID') }}"
+        acme_eab_hmac_key: "{{ lookup('env', 'ACME_EAB_HMAC_KEY') }}"
+    - role: rails-app
+      vars:
+        rails_app_name: round-three
+        rails_app_domain: umasstransit.org
+        rails_production_key_kp_path: rails/round-three/production.key
+        rails_database:
+          database: transit_round_three
+          host: umwebdb.umass.edu
+          port: 3308
+          username: transit_round_three
+          password_kp_path: databases/round-three
+        rails_needs_sidekiq: false

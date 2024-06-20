@@ -1,8 +1,13 @@
 [umts_servers]
 afs-umts-web2.admin.umass.edu
+afs-umts-web3.admin.umass.edu
 
 [rails_apps]
 afs-umts-web2.admin.umass.edu
+afs-umts-web3.admin.umass.edu
 
 [umaps_rails]
 afs-umts-web2.admin.umass.edu
+
+[round_three]
+afs-umts-web3.admin.umass.edu
