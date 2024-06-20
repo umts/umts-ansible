@@ -23,4 +23,5 @@
   user:
     name: "{{ item }}"
     state: absent
+    remove: true
   loop: "{{ transportation_users.absent | default([], true) }}"

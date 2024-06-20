@@ -4,6 +4,7 @@
     name: "{{ rails_app_name }}"
     state: present
     system: yes
+    create_home: false
 
 - name: Deploy group
   group:
