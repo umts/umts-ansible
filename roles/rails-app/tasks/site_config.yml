@@ -7,6 +7,8 @@
     group: root
     mode: 0644
   notify: reload apache
+  vars:
+    app_additional_domains: "{{ rails_app_additional_domains | default([], true) }}"
 
 - name: Enable site
   file:
