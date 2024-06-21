@@ -42,6 +42,19 @@
     - sites-available
     - sites-enabled
 
+- name: FQDN virtualhost
+  template:
+    src: fqdn.conf.j2
+    dest: "/etc/httpd/sites-available/{{ ansible_fqdn }}.conf"
+  notify: reload apache
+
+- name: Enable FQDN virtualhost
+  file:
+    src: "/etc/httpd/sites-available/{{ ansible_fqdn }}.conf"
+    dest: "/etc/httpd/sites-enabled/00-{{ ansible_fqdn }}.conf"
+    state: link
+  notify: reload apache
+
 - name: Allow web traffic
   firewalld:
     service: "{{ item }}"

@@ -1,0 +1,17 @@
+<VirtualHost *:80>
+  SSLEngine Off
+  ServerName {{ ansible_fqdn }}
+  Redirect 403 /
+</VirtualHost>
+
+<VirtualHost *:443>
+  SSLEngine On
+  SSLStrictSNIVHostCheck On
+  
+  SSLCertificateFile /etc/letsencrypt/live/default/cert.pem
+  SSLCertificateChainFile /etc/letsencrypt/live/default/chain.pem
+  SSLCertificateKeyFile /etc/letsencrypt/live/default/privkey.pem
+
+  ServerName {{ ansible_fqdn }}
+  Redirect 403 /
+</VirtualHost>
