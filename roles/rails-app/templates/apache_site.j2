@@ -44,6 +44,8 @@
   </Directory>
 
   LogLevel notice
+  ErrorLog "/var/log/httpd/{{ rails_app_name }}-error.log"
+  CustomLog "/var/log/httpd/{{ rails_app_name }}-access.log" combined
 
   <Location />
     AuthType shibboleth
