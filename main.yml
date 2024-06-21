@@ -82,6 +82,7 @@
         rails_app_domain: umasstransit.org
         rails_app_additional_domains:
           - www.umasstransit.org
+        rails_app_domain_hsts_preload: true
         rails_production_key_kp_path: rails/round-three/production.key
         rails_database:
           database: transit_round_three

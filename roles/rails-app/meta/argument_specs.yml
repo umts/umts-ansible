@@ -8,6 +8,9 @@ argument_specs:
       rails_app_domain:
         required: true
         type: str
+      rails_app_domain_hsts_preload:
+        required: false
+        type: bool
       rails_app_additional_domains:
         required: false
         type: list

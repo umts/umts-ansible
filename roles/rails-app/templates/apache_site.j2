@@ -33,6 +33,8 @@
   ServerName {{ rails_app_domain }}
   DocumentRoot /srv/{{ rails_app_name }}/current/public
 
+  Header always set Strict-Transport-Security "max-age=63072000{{ "; includeSubDomains; preload" if rails_app_domain_hsts_preload | default(false) }}"
+
   RailsEnv production
   PassengerUser {{ rails_app_name }}
 
