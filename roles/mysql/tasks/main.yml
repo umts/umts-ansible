@@ -1,0 +1,7 @@
+---
+- name: MySQL client and libs
+  yum:
+    name:
+      - mysql
+      - mysql-devel
+    state: present

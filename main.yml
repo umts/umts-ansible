@@ -9,7 +9,7 @@
   become: true
   roles:
     - apache
-    - mariadb
+    - mysql
 
 - hosts: umaps_rails
   become: true
