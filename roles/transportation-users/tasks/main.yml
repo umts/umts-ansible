@@ -4,6 +4,11 @@
     name: admin
     state: present
 
+- name: Deploy group
+  group:
+    name: deploy
+    state: present
+
 - name: Allow admins to sudo
   copy:
     src: local_admin_sudo

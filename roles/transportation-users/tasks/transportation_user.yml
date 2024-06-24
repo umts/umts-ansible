@@ -5,6 +5,7 @@
     comment: "{{ transportation_user.comment }}"
     groups: "{{ transportation_user.groups }}"
     state: present
+    local: true
 
 - name: "Create SSH directory for {{ transportation_user.name }}"
   file:
