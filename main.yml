@@ -30,12 +30,8 @@
         shibboleth_idp_metadata_url: 'https://webauth.umass.edu/idp/shibboleth'
     - role: umass_it.common.certbot
       vars:
-        certificate_fqdns:
-          # - "{{ ansible_fqdn }}"
+        certbot_domains:
           - hub.parking.umass.edu
-        acme_server: "https://acme.sectigo.com/v2/InCommonRSAOV"
-        acme_eab_kid: "{{ lookup('env', 'ACME_EAB_KID') }}"
-        acme_eab_hmac_key: "{{ lookup('env', 'ACME_EAB_HMAC_KEY') }}"
     - role: rails-app
       vars:
         rails_app_name: umaps-rails
@@ -67,15 +63,11 @@
         shibboleth_idp_host: webauth.umass.edu
         shibboleth_idp_entity_id: 'https://webauth.umass.edu/idp/shibboleth'
         shibboleth_idp_metadata_url: 'https://webauth.umass.edu/idp/shibboleth'
-    - role: umass_it.common.certbot
+    - role: certbot
       vars:
-        certificate_fqdns:
-          # - "{{ ansible_fqdn }}"
+        certbot_domains:
           - umasstransit.org
           - www.umasstransit.org
-        acme_server: "https://acme.sectigo.com/v2/InCommonRSAOV"
-        acme_eab_kid: "{{ lookup('env', 'ACME_EAB_KID') }}"
-        acme_eab_hmac_key: "{{ lookup('env', 'ACME_EAB_HMAC_KEY') }}"
     - role: rails-app
       vars:
         rails_app_name: round-three

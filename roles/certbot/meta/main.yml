@@ -1,0 +1,16 @@
+---
+dependencies:
+  - role: umass_it.common.certbot
+    vars:
+      acme_server: "https://acme.sectigo.com/v2/InCommonRSAOV"
+      acme_eab_kid: "{{ lookup('env', 'ACME_EAB_KID') }}"
+      acme_eab_hmac_key: "{{ lookup('env', 'ACME_EAB_HMAC_KEY') }}"
+      certificate_fqdns: "{{ certbot_domains }}"
+    when: running_in_vagrant | default(false)
+  - role: umass_it.common.certbot
+    vars:
+      acme_server: "https://acme.sectigo.com/v2/InCommonRSAOV"
+      acme_eab_kid: "{{ lookup('env', 'ACME_EAB_KID') }}"
+      acme_eab_hmac_key: "{{ lookup('env', 'ACME_EAB_HMAC_KEY') }}"
+      certificate_fqdns: "{{ certbot_domains + [ ansible_fqdn ] }}"
+    when: not (running_in_vagrant | default(false))
