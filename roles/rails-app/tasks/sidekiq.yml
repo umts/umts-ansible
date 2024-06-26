@@ -9,14 +9,6 @@
     enabled: true
     state: started
 
-- name: Sidekiq config
-  copy:
-    dest: /srv/{{ rails_app_name }}/shared/config/sidekiq.yml
-    src: sidekiq.yml
-    owner: "{{ rails_app_name }}"
-    group: deploy
-    mode: 0o664
-
 - name: Sidekiq systemd unit
   template:
     src: sidekiq.service.j2
