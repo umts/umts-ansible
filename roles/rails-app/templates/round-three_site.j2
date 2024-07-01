@@ -1,0 +1,8 @@
+  <Location /csp_report>
+    ShibRequestSetting requireSession false
+    Require all granted
+  </Location>
+  <LocationMatch "^/vehicles/fa_export(\.(csv|html))?$">
+    ShibRequestSetting requireSession false
+    Require all granted
+  </LocationMatch>
