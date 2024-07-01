@@ -82,4 +82,4 @@
           port: 3308
           username: transit_round_three
           password_kp_path: databases/round-three
-        rails_needs_sidekiq: false
+        rails_needs_sidekiq: true
