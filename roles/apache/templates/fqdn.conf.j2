@@ -7,10 +7,16 @@
 <VirtualHost *:443>
   SSLEngine On
   SSLStrictSNIVHostCheck On
-  
-  SSLCertificateFile /etc/letsencrypt/live/default/cert.pem
-  SSLCertificateChainFile /etc/letsencrypt/live/default/chain.pem
-  SSLCertificateKeyFile /etc/letsencrypt/live/default/privkey.pem
+
+  <IfFile /etc/letsencrypt/live/default/privkey.pem>
+    SSLCertificateFile /etc/letsencrypt/live/default/cert.pem
+    SSLCertificateChainFile /etc/letsencrypt/live/default/chain.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/default/privkey.pem
+  </IfFile>
+  <IfFile !/etc/letsencrypt/live/default/privkey.pem>
+    SSLCertificateFile /etc/pki/tls/certs/localhost.crt
+    SSLCertificateKeyFile /etc/pki/tls/private/localhost.key
+  </IfFile>
 
   ServerName {{ ansible_fqdn }}
   Redirect 403 /
