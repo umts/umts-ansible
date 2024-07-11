@@ -62,6 +62,6 @@ transportation_users:
     - name: yavuz
       comment: Metin Yavuz
       groups: ['admin', 'deploy']
-      ssh_keys:
+      ssh-keys:
         - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHdBXSmfUvx9MFQelLVyMxjDtIdvLyLisCc8vDv8IYMd"
   absent:
