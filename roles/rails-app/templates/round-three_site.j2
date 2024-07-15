@@ -6,3 +6,7 @@
     ShibRequestSetting requireSession false
     Require all granted
   </LocationMatch>
+
+  <Location /faye>
+    ProxyPass "http://localhost:9292" upgrade=websocket
+  </Location>
