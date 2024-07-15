@@ -37,6 +37,9 @@
         rails_app_name: umaps-rails
         rails_app_domain: hub.parking.umass.edu
         rails_production_key_kp_path: rails/umaps-rails/production.key
+        rails_app_additional_shared_directories:
+          - private
+          - scan_database
         rails_database:
           database: umaps-rails-production
           host: umwebdb.umass.edu
@@ -76,6 +79,9 @@
           - www.umasstransit.org
         rails_app_domain_hsts_preload: true
         rails_production_key_kp_path: rails/round-three/production.key
+        rails_app_additional_shared_directories:
+          - documents
+          - private
         rails_database:
           database: transit_round_three
           host: umwebdb.umass.edu

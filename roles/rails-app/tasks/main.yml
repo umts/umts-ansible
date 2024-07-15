@@ -35,13 +35,22 @@
     group: deploy
     mode: 0o6775
 
-- name: Config directory
+- name: Base shared directories
+  set_fact:
+    rails_app_base_shared_directories:
+      - config
+      - log
+      - pids
+      - storage
+
+- name: Shared directories
   file:
-    path: /srv/{{ rails_app_name }}/shared/config
+    path: /srv/{{ rails_app_name }}/shared/{{ item }}
     state: directory
     owner: "{{ rails_app_name }}"
     group: deploy
     mode: 0o6775
+  loop: "{{ rails_app_base_shared_directories + rails_app_additional_shared_directories | default([]) }}"
 
 - import_tasks: production_key.yml
 - import_tasks: database_config.yml
