@@ -1,0 +1,14 @@
+---
+- name: Faye systemd unit
+  template:
+    src: faye.service.j2
+    dest: /etc/systemd/system/faye.service
+    owner: root
+    group: root
+    mode: 0o644
+
+- name: Faye service
+  systemd:
+    name: faye
+    enabled: true
+    daemon_reload: true

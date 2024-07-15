@@ -83,3 +83,6 @@
           username: transit_round_three
           password_kp_path: databases/round-three
         rails_needs_sidekiq: true
+    - role: private-pub
+      vars:
+        private_pub_workdir: /srv/round-three/current

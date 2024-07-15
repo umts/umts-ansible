@@ -1,0 +1,18 @@
+[Unit]
+Description=Faye - private-pub
+After=network.target
+
+[Service]
+Type=notify
+WatchdogSec=10
+Restart=always
+
+WorkingDirectory={{ private_pub_workdir }}
+ExecStart=/opt/ruby/bin/bundle exec puma -C config/private_pub.rb
+
+Environment="RACK_ENV=production"
+
+SyslogIdentifier=faye
+
+[Install]
+WantedBy=multi-user.target
