@@ -13,11 +13,6 @@ transportation_users:
       groups: ['deploy']
       ssh-keys:
         - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDWMzMsM+oXYCyrfZHQiJn9kc3VOdr1nQk3XExq3yECu"
-    - name: ashanti
-      comment: Ashanti Roeung
-      groups: ['deploy']
-      ssh-keys:
-        - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA3f31gIBIgH9arcWkjFWxFEIjRQFmdv5P1OSRhQ+VaO"
     - name: ben
       comment: Ben Melz
       groups: ['admin', 'deploy']
@@ -29,6 +24,7 @@ transportation_users:
       groups: ['deploy']
       ssh-keys:
         - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDHB4mojROf+3YA+qjzN5m+qm5cLsfre5NVvC+0QByuW"
+        - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP7s0oV3hNKkh17X/dvzF0isElD4wxdNgAgFC2LvwDUu"
     - name: justin
       comment: Justin Forgue
       groups: ['deploy']
@@ -48,6 +44,7 @@ transportation_users:
       groups: ['deploy']
       ssh-keys:
         - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKbBH3sh5ZwvjOFYn0xE/p8XU3YWLy2fTQVHtMybj0E0"
+        - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDUhK8Kl97A8hRAgp2O7mgfHvzi/I5UFiFqtS9+QE5+2fUsp60wRBS5ExRkJ36hEOyhVGGDxS/oZM+LwE1OQOsvB8D46swmfkfhGOY3CX/PgWU1+/twlnW05edW9vZKAMXaFucb88OMsM1qhhF5FN+2DvRa6nXZabUsbzyqJiyIKA1XRNGzZXzSKuG5uogtgDvYydJBPhXhpB3U2jWZ9VkN4yo2vPwPEH/UYiQQ3IojhEHB4Fi7Vv8gwmq1Sd+XhvLvJUf6BtE7zPW+TAsGPtsjJ0pNo9BP59S2AsRbjIdRzHPkvXkt1L0Oy8u5ezJWKDMoWQ+IPbM5lFcAbbeMFZv/QMuOrHNXzXI5fGY5bzDjzP0JJy1f9whnFvd33AeaOpwusjeWO5loOmMH1G0nxb0qsJ7y8fLioOtclsT++ltAQibdXOZ2hxaE0upZKI/Zl/P7nZes/sIt/8B1Ute+qp1XIFpZQGIjZMbk26sDdHFj5dsTT0RFNgBbsysMFs8gpHk="
     - name: matt
       comment: Matt Moretti
       groups: ['admin', 'deploy']
@@ -65,3 +62,5 @@ transportation_users:
       ssh-keys:
         - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHdBXSmfUvx9MFQelLVyMxjDtIdvLyLisCc8vDv8IYMd"
   absent:
+    - name: ashanti
+      comment: Ashanti Roeung
