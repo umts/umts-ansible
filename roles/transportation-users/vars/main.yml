@@ -23,9 +23,7 @@ transportation_users:
     - name: elizabeth
       comment: Elizabeth Halpern
       groups: ['deploy']
-      ssh-keys:
-        - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDHB4mojROf+3YA+qjzN5m+qm5cLsfre5NVvC+0QByuW"
-        - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP7s0oV3hNKkh17X/dvzF0isElD4wxdNgAgFC2LvwDUu"
+      ssh-keys: []
     - name: justin
       comment: Justin Forgue
       groups: ['deploy']
