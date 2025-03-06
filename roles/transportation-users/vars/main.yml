@@ -19,6 +19,11 @@ transportation_users:
       groups: ['deploy']
       ssh-keys:
         - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDWMzMsM+oXYCyrfZHQiJn9kc3VOdr1nQk3XExq3yECu"
+    - name: aryan
+      comment: Aryan Vakil
+      groups: ['deploy']
+      ssh-keys:
+        - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIrsjHtMNXygnYeokvNdZFimGFvwNtmzze/6UtnOvdGi"
     - name: ben
       comment: Ben Melz
       groups: ['admin', 'deploy']
