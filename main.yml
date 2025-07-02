@@ -28,7 +28,7 @@
         shibboleth_idp_host: webauth.umass.edu
         shibboleth_idp_entity_id: 'https://webauth.umass.edu/idp/shibboleth'
         shibboleth_idp_metadata_url: 'https://webauth.umass.edu/idp/shibboleth'
-    - role: umass_it.common.certbot
+    - role: certbot
       vars:
         certbot_domains:
           - hub.parking.umass.edu
