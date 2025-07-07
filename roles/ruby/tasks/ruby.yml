@@ -13,6 +13,8 @@
       /usr/local/bin/ruby-install
       --rubies-dir /opt/rubies
       ruby {{ ruby_version }}
+      --
+      --enable-yjit
     creates: /opt/rubies/ruby-{{ ruby_version }}
 
 - name: Update Rubygems

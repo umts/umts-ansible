@@ -16,7 +16,7 @@
   roles:
     - role: ruby
       vars:
-        ruby_version: '3.1.4'
+        ruby_version: '3.3.8'
         ruby_make_default: true
     - passenger
     - role: nodejs
@@ -41,10 +41,11 @@
           - private
           - scan_database
         rails_database:
-          database: umaps-rails-production
-          host: umwebdb.umass.edu
-          port: 3308
-          username: umaps-rail-production
+          adapter: trilogy
+          database: umaps_rails_production
+          host: mysql.it.umass.edu
+          port: 6446
+          username: af-umass-rails
           password_kp_path: databases/umaps-rails
         rails_needs_sidekiq: true
     - umaps-scan-share
@@ -83,6 +84,7 @@
           - documents
           - private
         rails_database:
+          adapter: mysql2
           database: transit_round_three
           host: umwebdb.umass.edu
           port: 3308

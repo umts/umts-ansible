@@ -19,7 +19,7 @@ Vagrant.configure('2') do |config|
       ansible.groups = {
         'umts_servers' => ['web'],
         'rails_apps' => ['web'],
-        'round_three' => ['web']
+        'umaps_rails' => ['web']
       }
       ansible.extra_vars = {
         running_in_vagrant: true,

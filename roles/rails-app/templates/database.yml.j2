@@ -1,5 +1,5 @@
 production:
-  adapter: mysql2
+  adapter: {{ rails_database.adapter }}
   database: {{ rails_database.database }}
   host: {{ rails_database.host }}
   port: {{ rails_database.port }}
