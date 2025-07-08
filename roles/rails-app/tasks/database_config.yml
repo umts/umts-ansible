@@ -2,10 +2,9 @@
 - name: Include base vars
   include_vars: "{{ role_path }}/../base/vars/main.yml"
 
-- name: Database config presence
-  stat:
-    path: /srv/{{ rails_app_name }}/shared/config/database.yml
-  register: database_config_stat
+- name: Merge database overrides
+  set_fact:
+    rails_database: "{{ rails_database | default({}) | combine(rails_database_overrides, recursive=True) }}"
 
 - name: Read database password
   become: false
@@ -15,9 +14,7 @@
     db_password: "{{ password_database_password }}"
     secret_path: "{{ rails_database.password_kp_path }}"
   register: database_password_secret
-  when: >
-    database_config_stat.stat.exists == false
-    and not rails_database.password is defined
+  when: not rails_database.password is defined
 
 - name: Database configuration
   template:
@@ -26,4 +23,3 @@
     owner: "{{ rails_app_name }}"
     group: deploy
     mode: 0o660
-  when: database_config_stat.stat.exists == false

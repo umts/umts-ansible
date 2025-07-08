@@ -47,6 +47,11 @@
           port: 6446
           username: af-umass-rails
           password_kp_path: databases/umaps-rails
+          other_databases: >
+            t2_flex:
+              database: t2_flex
+              adapter: t2_flex
+              database_tasks: false
         rails_needs_sidekiq: true
     - umaps-scan-share
 

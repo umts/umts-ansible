@@ -23,7 +23,7 @@ Vagrant.configure('2') do |config|
       }
       ansible.extra_vars = {
         running_in_vagrant: true,
-        rails_database: {
+        rails_database_overrides: {
           database: 'application_production',
           host: '10.19.69.20',
           port: 3306,

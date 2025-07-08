@@ -24,6 +24,9 @@ argument_specs:
         required: true
         type: dict
         options:
+          adapter:
+            required: true
+            type: str
           database:
             required: true
             type: str
@@ -46,5 +49,10 @@ argument_specs:
             description: >
               The path to the password within the password database. Can be
               omitted if the password is provided directly.
+            required: false
+            type: str
+          other_databases:
+            description: >
+              Single string containing non-primary database YAML
             required: false
             type: str

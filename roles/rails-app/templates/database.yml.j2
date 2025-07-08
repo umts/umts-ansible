@@ -1,14 +1,16 @@
 production:
-  adapter: {{ rails_database.adapter }}
-  database: {{ rails_database.database }}
-  host: {{ rails_database.host }}
-  port: {{ rails_database.port }}
-  username: {{ rails_database.username }}
-  {% if rails_database.password is defined and rails_database.password -%}
-  password: {{ rails_database.password }}
-  {% else -%}
-  {% set name = rails_database.password_kp_path | split('/') | last -%}
-  password: {{ database_password_secret.secret[name].password }}
-  {% endif -%}
-  pool: 20
-  reconnect: true
+  primary:
+    adapter: {{ rails_database.adapter }}
+    database: {{ rails_database.database }}
+    host: {{ rails_database.host }}
+    port: {{ rails_database.port }}
+    username: {{ rails_database.username }}
+    {% if rails_database.password is defined and rails_database.password -%}
+    password: {{ rails_database.password }}
+    {% else -%}
+    {% set name = rails_database.password_kp_path | split('/') | last -%}
+    password: {{ database_password_secret.secret[name].password }}
+    {% endif -%}
+    pool: 20
+    reconnect: true
+  {{ rails_database.other_databases | indent(2) }}
