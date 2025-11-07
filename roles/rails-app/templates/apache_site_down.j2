@@ -1,0 +1,37 @@
+<VirtualHost *:80>
+  SSLEngine Off
+  ServerName {{ rails_app_domain }}
+
+  {% if app_additional_domains | length > 0 %}
+  ServerAlias {{ app_additional_domains | join(' ') }}
+  {% endif %}
+
+  RewriteEngine On
+  RewriteRule ^.*$ / [NC,R=503,L]
+
+  <Location />
+    Require all granted
+    PassengerEnabled off
+  </Location>
+</VirtualHost>
+
+<VirtualHost *:443>
+  SSLEngine On
+  SSLCertificateFile /etc/letsencrypt/live/default/cert.pem
+  SSLCertificateChainFile /etc/letsencrypt/live/default/chain.pem
+  SSLCertificateKeyFile /etc/letsencrypt/live/default/privkey.pem
+
+  ServerName {{ rails_app_domain }}
+
+  {% if app_additional_domains | length > 0 %}
+  ServerAlias {{ app_additional_domains | join(' ') }}
+  {% endif %}
+
+  RewriteEngine On
+  RewriteRule ^.*$ / [NC,R=503,L]
+
+  <Location />
+    Require all granted
+    PassengerEnabled off
+  </Location>
+</VirtualHost>

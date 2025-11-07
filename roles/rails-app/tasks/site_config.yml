@@ -16,3 +16,13 @@
     dest: /etc/httpd/sites-enabled/{{ rails_app_name }}.conf
     state: link
   notify: reload apache
+
+- name: Apache site config - maintenance
+  template:
+    src: apache_site_down.j2
+    dest: /etc/httpd/sites-available/{{ rails_app_name }}-down.conf
+    owner: root
+    group: root
+    mode: 0644
+  vars:
+    app_additional_domains: "{{ rails_app_additional_domains | default([], true) }}"
