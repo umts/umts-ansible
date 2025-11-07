@@ -35,6 +35,18 @@
     group: deploy
     mode: 0o6775
 
+- name: Base directories
+  file:
+    path: /srv/{{ rails_app_name }}/{{ item }}
+    state: directory
+    owner: "{{ rails_app_name }}"
+    group: deploy
+    mode: 0o6775
+  loop:
+    - releases
+    - shared
+    - repo
+
 - name: Base shared directories
   set_fact:
     rails_app_base_shared_directories:
