@@ -4,7 +4,7 @@
 
 - name: Merge database overrides
   set_fact:
-    rails_database: "{{ rails_database | default({}) | combine(rails_database_overrides, recursive=True) }}"
+    rails_database: "{{ rails_database | default({}) | combine(rails_database_overrides | default({}), recursive=True) }}"
 
 - name: Read database password
   become: false
