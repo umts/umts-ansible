@@ -5,6 +5,11 @@
     - base
     - transportation-users
 
+- hosts: docker_hosts
+  become: true
+  roles:
+    - docker-host
+
 - hosts: rails_apps
   become: true
   roles:

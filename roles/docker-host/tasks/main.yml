@@ -1,0 +1,39 @@
+---
+- name: Docker repository
+  yum_repository:
+    name: docker-ce-stable
+    description: Docker CE Stable - $basearch
+    baseurl: "https://download.docker.com/linux/rhel/$releasever/$basearch/stable"
+    enabled: true
+    gpgcheck: true
+    gpgkey: "https://download.docker.com/linux/rhel/gpg"
+
+- name: Install Docker packages
+  yum:
+    state: present
+    pkg:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-compose-plugin
+      - docker-buildx-plugin
+
+- name: Docker service
+  systemd:
+    name: docker
+    enabled: true
+    state: started
+
+- name: Docker sudo wrapper
+  copy:
+    dest: /usr/local/bin/docker
+    content: |
+      #!/bin/sh
+      sudo /usr/bin/docker "$@"
+    mode: '0755'
+
+- name: Docker sudoers file
+  template:
+    src: docker_sudo.j2
+    dest: /etc/sudoers.d/docker
+    mode: '0440'

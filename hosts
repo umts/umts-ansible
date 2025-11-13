@@ -2,6 +2,8 @@
 afs-umts-web2.admin.umass.edu
 afs-umts-web3.admin.umass.edu
 
+[docker_hosts]
+
 [rails_apps]
 afs-umts-web2.admin.umass.edu
 afs-umts-web3.admin.umass.edu
