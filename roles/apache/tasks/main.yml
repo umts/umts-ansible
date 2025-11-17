@@ -1,4 +1,8 @@
 ---
+- name: Base web-server setup
+  include_role:
+    name: web-server
+
 - name: Install Apache
   yum:
     state: present
@@ -54,12 +58,3 @@
     dest: "/etc/httpd/sites-enabled/00-{{ ansible_fqdn }}.conf"
     state: link
   notify: reload apache
-
-- name: Allow web traffic
-  firewalld:
-    service: "{{ item }}"
-    permanent: true
-    state: enabled
-  with_items:
-    - http
-    - https

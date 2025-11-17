@@ -10,6 +10,7 @@
   become: true
   roles:
     - docker-host
+    - web-server
 
 - hosts: rails_apps
   become: true

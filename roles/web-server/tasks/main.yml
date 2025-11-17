@@ -1,0 +1,10 @@
+---
+- name: Allow web traffic
+  firewalld:
+    service: "{{ item }}"
+    permanent: true
+    immediate: true
+    state: enabled
+  with_items:
+    - http
+    - https
