@@ -4,7 +4,6 @@
   roles:
     - base
     - transportation-users
-    - microsoft_defender
 
 - hosts: docker_hosts
   become: true
