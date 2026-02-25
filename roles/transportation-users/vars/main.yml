@@ -3,7 +3,7 @@ transportation_users:
   present:
     - name: adam
       comment: Adam Sherson
-      groups: ['admin', 'deploy']
+      groups: ['ssh-local', 'admin', 'deploy']
       ssh-keys:
         - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDycHeCgF6QIBKGgXObQtwdQjddrKVLIYPVdC9/CYDFDKuD3wERChIZnxfP+5LpQrFvEwK8NFALhsiiPEc3gtfgOT3LstCJlV/BCxGARnwf2/drK4uygTjJF/IMA7/nvHySsdKxie4ZGd5gUn+fw97cgFSUNVzggtLWwNfpUX1iEIR9cnrxCvuZT3Xuj4UVPpd3KDd0JJhrbdbNfMYtuK2cw8yKN6+SpxGfsdf9+DaOT+j1su7woG3mFFgaPas5A7H2IkOjIsK/LvTC56Moi+R++uXcC+fHN7i2W/s5pUV0intKlb9GgkipFKuEIaqNArKzTh5yEKgbWkxS7GEJK2/P"
         - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3PqUOTwFveByqrYUPUVZwWBshY0tQ6uRsLuZaSxXHx1gIt7tuEXfujDqMhHvA0FqYZcyqhgmWRWHj1GfsOdQyXfgW+k7/4eu9UDzwQq4Kf58plPsq17a0hcuyMnKdNsCySZeJaFdFRYN91M00dVjBIRNEQQGyuLwDcEyq09jq98sXSjsDlz2MFU6xlPlXvnj2p4LmwA+SNIWrUJrt59K6MMWZigxLq1VLJqcrVdkhE4Ew1lArHv0vbsYlLvXj6HBEB2Tz2molHW8AsZOivmjO7ytLgwOdSzPTC6IpcZoCVC9E5cBIiCOFDpeP9NIR92QPhHNhU54rJxUernCIQ4C7"
@@ -11,45 +11,45 @@ transportation_users:
         - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC9Se+uD0VKVk+AVQr3RVu9P/4zPdZke3yGbsXuybAeSR1fXnI0wzVo3UHm08E6TtMGH2MvOMgFliE3YGpbocZHEplqY9annxyR2OHWW2vpCCbPyjctn47EYv6+nU90wNML8oHT2FxdnRDDO/QvCt1pVT7uuiRIsxzCZzIPbisGtXhB3TN72T6/qSfhvsQlA30WklY4d9w5/hWZ3SEV8/5Pld7mBcGX69J0+3QEuLZlfB70LwCW04GbrvH7LjwBr5MMlCON5unwzi/hgA4z7EVXgYmOHV5WZh4K7g94e7/IMjfHXkw73lHAC/wo5nQ90TSC1cnOnF8u28Mb25k/n8/NhA+kkhbaEEyJ1OF4Qlj0cyynglCZP8Dx8ad07BMEZaBF3pneXrgiaVCu5FTFSPtmmNammFxKoLjHiSP/fT5Kjd/1mIAxbEtsnRmN60OqtS4AlPoGEQuAWJDwtqHOBaCM8tHqNhmFZYjqtiSGMQt4S6+UjIzZryFsTzWUDaCSawc="
     - name: alex
       comment: Alex Locke
-      groups: ['deploy']
+      groups: ['ssh-local', 'deploy']
       ssh-keys:
         - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCx5U4s3r70QY536DUq+rY2DwIaKUyZuCOVHs1KT7+mfFyiAbcpu+7StZ5EsDybamq5QuRQM+P8nTp/Vsfp51DbE4oLkgZAcGS7vND9xtZMzeWbWfJEbOZHMz2V2mxJbBndius35521ENZ7TgOtIwqhR/MoA0N0d/lYdRpEMP5j0EHGoJRwm7dxuqVwc/UrKNj+EBjWCFxA6g/U7AxN6IDrv6JJEd0vhjpdZmLsdzJ9JrRd/vuQ3sLrfBrk4N2KhLZKNCxJs0XL8C2vWznTdZcTPbb2Lnz1JsIz+5JyiVCIKtmaZYXFip4BoaXuq3A/k0pxAylmwfl1NRey4ydqpj57MY1yH81Bic+zetZ6MwqUcNvAjuhA5evPk2b1P8EySlsEhOzsNZyPkYVOeBaxBDaWb4cTCPNWaTwPdoqYTjmZtQjLRqcqv+Jn4LPyVrsvLa7/agE6i6crsJtt36gMWnNRm0gr63rmOWzNJ9Duej8VaE41sayQdWTJUkdfZZ1W1llK33emw9HmSalzGyk4GPj5+uy3xcRiKP7r+ylh5yyYJzx5eaeN6oOtEuNyo7K4io/L2hRN2aYv3AnwV8mpvS46+m8D6Lt3CoJ5iKKICSj3HMhIhe6DhRbJyQ2/ZfMAIP/ZiAnJp2rcUJCAgvgqilwNVp9pizVY8NYpSTSWtyXnow=="
     - name: aryan
       comment: Aryan Vakil
-      groups: ['deploy']
+      groups: ['ssh-local', 'deploy']
       ssh-keys:
         - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIrsjHtMNXygnYeokvNdZFimGFvwNtmzze/6UtnOvdGi"
     - name: ben
       comment: Ben Melz
-      groups: ['admin', 'deploy']
+      groups: ['ssh-local', 'admin', 'deploy']
       ssh-keys:
         - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCrEzOS3u5D9D/5SfmZlNTp41GfKQFlxLvGQYNSuTbcKoLwIRxFI6uNny/ss1Wco+RF5dbkTYDfM7uF7Qr5hSxvtOoJLDPTa7DCYkcGAszE3N0HreEjQzOdWjlSGFle9DYYzyeCXTueeyu+zFwgE1006kjumfnGMiAWFK6NOtdYUeBznrVIIOFccJW7SSRNrtvA5bCddIszsW62QXcEX4vE3xvWyE86XdY1ZXfAtVQIfJZgQ8aFhYXk+oRcMCaEeKGKST/9Tes3piqqJrBxY6rYnhM4JxZThVpqs1dXb5kHY8tZ73jRzgfxLjtMP6es+1UFxZi6RtUsKo+B59E8DTfdl2eNFhgdm+eNLPeWSmcfxAev6BObTaoPlubqr3NIR6YvWJQeTLpURg6CAebRoz6PGcCSg17PqoT96EvJXEs0zOHkluudb83x13mFL99B33/2RtOpOjHsov4sEhB+PdMQ1vPp0T+csS8MDAypZMlHsyTMI5OzcGQ9RNblH4JjF4LmudXth+xXoOOV69aLoPbOU3M2jpHUsSu/3pVS+wPj5tQHXTImLHFWW5lyTLx6nqWHhl6IiChfANzW4GphDTsvMQANn/bi1GuSleZs7rHUoIX3eekKyci1QkhKIXBAdeDlMS1+26mayZs1rpSqQm7LhCkyBCUj1d0/RXEv95e0aw=="
         - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHHmQtF/MZZR/fKMtZzc8DwtwkKITNC8Vs0qckXd6eN7"
     - name: emmett
       comment: Emmett Quinn
-      groups: ['deploy']
+      groups: ['ssh-local', 'deploy']
       ssh-keys:
         - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGsqNLMXMUYNiKAMQ+p4LN7vjR4C1a2eP6Y6IP2EgJ1T"
     - name: louis
       comment: Louis Pate
-      groups: ['deploy']
+      groups: ['ssh-local', 'deploy']
       ssh-keys:
         - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKbBH3sh5ZwvjOFYn0xE/p8XU3YWLy2fTQVHtMybj0E0"
         - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDUhK8Kl97A8hRAgp2O7mgfHvzi/I5UFiFqtS9+QE5+2fUsp60wRBS5ExRkJ36hEOyhVGGDxS/oZM+LwE1OQOsvB8D46swmfkfhGOY3CX/PgWU1+/twlnW05edW9vZKAMXaFucb88OMsM1qhhF5FN+2DvRa6nXZabUsbzyqJiyIKA1XRNGzZXzSKuG5uogtgDvYydJBPhXhpB3U2jWZ9VkN4yo2vPwPEH/UYiQQ3IojhEHB4Fi7Vv8gwmq1Sd+XhvLvJUf6BtE7zPW+TAsGPtsjJ0pNo9BP59S2AsRbjIdRzHPkvXkt1L0Oy8u5ezJWKDMoWQ+IPbM5lFcAbbeMFZv/QMuOrHNXzXI5fGY5bzDjzP0JJy1f9whnFvd33AeaOpwusjeWO5loOmMH1G0nxb0qsJ7y8fLioOtclsT++ltAQibdXOZ2hxaE0upZKI/Zl/P7nZes/sIt/8B1Ute+qp1XIFpZQGIjZMbk26sDdHFj5dsTT0RFNgBbsysMFs8gpHk="
     - name: matt
       comment: Matt Moretti
-      groups: ['admin', 'deploy']
+      groups: ['ssh-local', 'admin', 'deploy']
       ssh-keys:
         - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCqCOcVAbedLOzlp5idFuOqo8Gnwi1AqHXk+dqdl0haPGzZ5tmi2HhwTTL/4Ey7pEcEgpbK8yezNCyXisqt0+mCspvMP28bZgKtNRAQBL8bXsiOUikZ1FKgVCNQLFNPmTEBJdZsyDTUhSGe5v5tVap1U7nNd57b59LL3SrRS+pTBkS7sg+pcXLd4/FFGjBpYSKsef6mkG0eAlZcGxjnw6qQse/ojU6cWBo6Pb6rPMLknVx5ilVB7HjHiKK8PzgCF+erH3MBvXvHlNl3OBZXxG7Hd/GffjiqXbJYBbEAZ1D7653IE2FBixM2JmXvnUE4lWi/s14rfTUoyX27JwM2cPBX campus\\mmoretti-af@AF-168499"
         - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKyxDvLfsVtnGTAi3Fv9lI/aGcmVqXFGWpWnDqhay2GG"
     - name: ndirschel
       comment: Nick Dirschel
-      groups: ['deploy']
+      groups: ['ssh-local', 'deploy']
       ssh-keys:
         - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCksIAiwZfi/D1MRVH1jT8id1b0P61NE5xSjHQ/sDbbLRqFB2On0086Mb2kHf7BxKNK5fskImDbbwxhWM1p1wUyeWi/01irF1U0cIiTB1qtXNGq5ZYC1CYofjwxUi/rUYE/ofrlXN4dDBkeqfhNkwWq7yCKOng4uxo9afyVWDUQz8utaneaxGVK0F2u+3hxQnB4NAG3HRzV7QiwpvqRWGfXE5ejKBe4IvwLmS9QCDSr6AhNtX9BKppnceZrjc7P0fkd0PLCinTWOILg5LhEU1cVUwi/jdTyUXFVPh03S/nZ1/pLjowOifN9ffQntI3NvZhyx+LgSp+yRvsE4NdrtwcJf4PpMUcBsD7WZcOGVs6nrue+mSXfAJCpusWuyC/mTndD6aDHdAZ1mOyd3o34PvKqIas73eEhW9D19ID7M05auRk2Ysu1xGCzsKNIzioroIvUxriz5dEqdA3+aknNvyVm2eXhUFFPFt2Y0I+WXRt8CCMRBt7faHWzqtRvR3JcBOE="
     - name: yavuz
       comment: Metin Yavuz
-      groups: ['admin', 'deploy']
+      groups: ['ssh-local', 'admin', 'deploy']
       ssh-keys:
         - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHdBXSmfUvx9MFQelLVyMxjDtIdvLyLisCc8vDv8IYMd"
   absent:

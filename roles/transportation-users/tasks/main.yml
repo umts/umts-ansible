@@ -1,4 +1,9 @@
 ---
+- name: Local ssh group
+  group:
+    name: ssh-local
+    state: present
+
 - name: Admin group
   group:
     name: admin
