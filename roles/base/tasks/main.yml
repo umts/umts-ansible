@@ -6,9 +6,3 @@
       - git
       - vim
       - "@development"
-
-- name: Firewalld
-  service:
-    name: firewalld
-    state: started
-    enabled: yes
