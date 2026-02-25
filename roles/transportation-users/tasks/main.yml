@@ -31,7 +31,7 @@
 
 - name: Remove old transportation users
   user:
-    name: "{{ item }}"
+    name: "{{ item.name }}"
     state: absent
     remove: true
   loop: "{{ transportation_users.absent | default([], true) }}"
