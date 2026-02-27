@@ -1,10 +1,18 @@
 ---
-- name: Allow web traffic
+- name: Allow http traffic
   firewalld:
-    service: "{{ item }}"
+    service: http
     permanent: true
     immediate: true
     state: enabled
-  with_items:
-    - http
-    - https
+    zone: "{{ item }}"
+  loop: "{{ active_firewall_zones }}"
+
+- name: Allow https traffic
+  firewalld:
+    service: https
+    permanent: true
+    immediate: true
+    state: enabled
+    zone: "{{ item }}"
+  loop: "{{ active_firewall_zones }}"

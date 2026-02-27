@@ -6,3 +6,18 @@
       - git
       - vim
       - "@development"
+
+- name: Get active firewall zones
+  command: firewall-cmd --get-active-zones
+  register: fw_zones
+  changed_when: false
+
+- name: Extract zone names
+  set_fact:
+    active_firewall_zones: >-
+      {{
+        fw_zones.stdout_lines
+        | reject('match', '^\s')
+        | map('regex_replace', '\s.*$', '')
+        | list
+      }}
