@@ -1,0 +1,44 @@
+- name: Transit VPN firewalld zone
+  ansible.builtin.command: "firewall-cmd --permanent --new-zone=gp_af_transit"
+  args:
+    creates: "/etc/firewalld/zones/gp_af_transit.xml"
+  notify: Reload firewalld
+
+- name: Flush handlers so firewalld picks up new zones
+  ansible.builtin.meta: flush_handlers
+
+- name: Get active firewall zones
+  command: firewall-cmd --get-active-zones
+  register: fw_zones
+  changed_when: false
+
+- name: Extract zone names
+  set_fact:
+    active_firewall_zones: >-
+      {{
+        fw_zones.stdout_lines
+        | reject('match', '^\s')
+        | map('regex_replace', '\s.*$', '')
+        | list
+      }}
+
+- name: Assign sources to Transit VPN
+  ansible.posix.firewalld:
+    zone: gp_af_transit
+    source: "172.24.19.176/28"
+    permanent: true
+    immediate: true
+    state: enabled
+  notify: Reload firewalld
+
+- name: Enable SSH from Transit VPN
+  ansible.posix.firewalld:
+    zone: gp_af_transit
+    service: ssh
+    permanent: true
+    immediate: true
+    state: enabled
+  notify: Reload firewalld
+
+- name: Reload firewalld now that everything is configured
+  ansible.builtin.meta: flush_handlers

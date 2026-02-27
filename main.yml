@@ -3,6 +3,7 @@
   become: true
   roles:
     - base
+    - firewall-adjustments
     - transportation-users
 
 - hosts: docker_hosts
