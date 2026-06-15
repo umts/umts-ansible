@@ -3,7 +3,6 @@
   become: true
   roles:
     - base
-    - open-vm-tools
     - firewall-adjustments
     - transportation-users
 
