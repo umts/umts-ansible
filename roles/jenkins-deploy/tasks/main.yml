@@ -1,0 +1,47 @@
+---
+- name: Local ssh group
+  group:
+    name: ssh-local
+    state: present
+
+- name: Jenkins user
+  user:
+    name: "{{ jenkins_username }}"
+    state: present
+    groups: ['ssh-local']
+    append: true
+    local: true
+
+- name: Jenkins SSH directory
+  file:
+    path: "/home/{{ jenkins_username }}/.ssh"
+    state: directory
+    owner: "{{ jenkins_username }}"
+    group: "{{ jenkins_username }}"
+    mode: 0o700
+
+- name: Jenkins SSH key
+  copy:
+    dest: "/home/{{ jenkins_username }}/.ssh/authorized_keys"
+    content: "{{ jenkins_ssh_key }}"
+    owner: "{{ jenkins_username }}"
+    group: "{{ jenkins_username }}"
+    mode: 0o600
+
+- name: Deploy Sudo alias
+  copy:
+    src: deploy_commands_sudo
+    dest: /etc/sudoers.d/deploy
+    owner: root
+    group: root
+    mode: 0o440
+    validate: visudo -cf %s
+
+- name: Jenkins sudo file
+  template:
+    src: jenkins_sudo.j2
+    dest: /etc/sudoers.d/jenkins
+    owner: root
+    group: root
+    mode: 0o440
+    validate: visudo -cf %s
