@@ -11,6 +11,15 @@
     name: deploy
     state: present
 
+- name: Deploy sudo alias
+  copy:
+    src: deploy_commands_sudo
+    dest: /etc/sudoers.d/deploy
+    owner: root
+    group: root
+    mode: 0o440
+    validate: visudo -cf %s
+
 - name: Allow deploy group to sudo
   copy:
     src: deploy_sudo
