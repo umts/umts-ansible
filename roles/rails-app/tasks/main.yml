@@ -14,7 +14,7 @@
 - name: Deploy sudo alias
   copy:
     src: deploy_commands_sudo
-    dest: /etc/sudoers.d/deploy
+    dest: /etc/sudoers.d/deploy_commands
     owner: root
     group: root
     mode: 0o440
