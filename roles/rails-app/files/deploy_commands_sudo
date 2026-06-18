@@ -1,0 +1,1 @@
+Cmnd_Alias DEPLOYING = /opt/ruby/bin/bundle exec whenever *, /usr/bin/systemctl start *, /usr/bin/systemctl stop *, /usr/bin/systemctl restart *, /usr/bin/systemctl reload *, /usr/bin/systemctl kill *

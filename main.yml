@@ -5,6 +5,7 @@
     - base
     - firewall-adjustments
     - transportation-users
+    - jenkins-deploy
 
 - hosts: docker_hosts
   become: true

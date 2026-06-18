@@ -1,0 +1,3 @@
+---
+jenkins_username: jenkins
+jenkins_ssh_key: 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICsVAC1byWuUdkvKNGZY469vtwc2I+43rcAmVNn4u8FZ'
