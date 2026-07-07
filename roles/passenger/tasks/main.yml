@@ -11,7 +11,7 @@
     baseurl: "https://oss-binaries.phusionpassenger.com/yum/passenger/el/$releasever/$basearch"
     repo_gpgcheck: true
     gpgcheck: false
-    gpgkey: "https://oss-binaries.phusionpassenger.com/auto-software-signing-gpg-key.txt"
+    gpgkey: "https://oss-binaries.phusionpassenger.com/auto-software-signing-gpg-key.txt https://oss-binaries.phusionpassenger.com/auto-software-signing-gpg-key-2025.txt"
     sslverify: true
     sslcacert: /etc/pki/tls/certs/ca-bundle.crt
     enabled: true
