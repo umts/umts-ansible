@@ -52,6 +52,11 @@ transportation_users:
       groups: ['ssh-local', 'admin', 'deploy']
       ssh-keys:
         - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHdBXSmfUvx9MFQelLVyMxjDtIdvLyLisCc8vDv8IYMd"
+    - name: zafnun
+      comment: Gazi Zafnun Hasnat
+      groups: ['ssh-local', 'deploy']
+      ssh-keys:
+        - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILP7wMhD/387MyqUG3GuYJkP0VeCOLQieT/O2w7I3MBP"
   absent:
     - name: ashanti
       comment: Ashanti Roeung
