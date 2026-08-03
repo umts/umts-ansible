@@ -56,7 +56,7 @@ transportation_users:
       comment: Gazi Zafnun Hasnat
       groups: ['ssh-local', 'deploy']
       ssh-keys:
-        - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILP7wMhD/387MyqUG3GuYJkP0VeCOLQieT/O2w7I3MBP"
+        - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAeZZ9PP2aKtQrmMHtH+DjwdO6j1idVB6rU4fQKq16/B"
   absent:
     - name: ashanti
       comment: Ashanti Roeung
